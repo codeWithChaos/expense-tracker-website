@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 
+import django_heroku
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -78,6 +81,9 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.parse("postgresql://expensetracker_ezwm_user:Ip6axBi5dRZ4ga7gXay4vP8IwnPV0KZe@dpg-crvae868ii6s738oks1g-a.oregon-postgres.render.com/expensetracker_ezwm")
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -123,3 +129,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
