@@ -81,7 +81,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse("postgresql://expensetracker_ezwm_user:Ip6axBi5dRZ4ga7gXay4vP8IwnPV0KZe@dpg-crvae868ii6s738oks1g-a.oregon-postgres.render.com/expensetracker_ezwm")
+# DATABASES['default'] = dj_database_url.parse("postgresql://expensetracker_ezwm_user:Ip6axBi5dRZ4ga7gXay4vP8IwnPV0KZe@dpg-crvae868ii6s738oks1g-a.oregon-postgres.render.com/expensetracker_ezwm")
 
 
 
@@ -123,7 +123,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -131,4 +131,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfile')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configure Django App for Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
