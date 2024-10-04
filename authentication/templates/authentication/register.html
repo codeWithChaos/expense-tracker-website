@@ -1,4 +1,6 @@
 {% extends "authentication/_base_auth.html" %} 
+{% load static %}
+
 {% block title %}Register{% endblock %}
 
 {% block content %}
@@ -19,6 +21,9 @@
               id="usernameField"
               class="form-control form-control-sm mt-3"
               placeholder="Username" />
+          </div>
+          <div class="invalid-feedback" style="display: none;">
+            <p></p>
           </div>
           <div class="form-group mb-3">
             <input
@@ -49,4 +54,6 @@
   </div>
   <div class="col-md-4"></div>
 </div>
+
+<script src="{% static 'js/register.js' %}"></script>
 {% endblock %}
