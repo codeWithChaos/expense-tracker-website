@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "47cf35227d66fbb28a98ba0d171bf6819a2d7df280e5879b25357609226e8348"
+            "sha256": "28efc593834b00108d0a3e3f06b59f8871e870a026e42b6b8d02c77ffcc20dc4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -48,22 +48,6 @@
             "index": "pypi",
             "version": "==0.3.1"
         },
-        "gunicorn": {
-            "hashes": [
-                "sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d",
-                "sha256:f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec"
-            ],
-            "index": "pypi",
-            "version": "==23.0.0"
-        },
-        "packaging": {
-            "hashes": [
-                "sha256:026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002",
-                "sha256:5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==24.1"
-        },
         "psycopg2": {
             "hashes": [
                 "sha256:121081ea2e76729acfb0673ff33755e8703d45e926e416cb59bae3a86c6a4981",
@@ -106,6 +90,13 @@
             ],
             "markers": "sys_platform == 'win32'",
             "version": "==2024.2"
+        },
+        "validate-email": {
+            "hashes": [
+                "sha256:784719dc5f780be319cdd185dc85dd93afebdb6ebb943811bc4c7c5f9c72aeaf"
+            ],
+            "index": "pypi",
+            "version": "==1.3"
         },
         "waitress": {
             "hashes": [

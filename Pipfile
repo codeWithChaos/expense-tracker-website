@@ -9,6 +9,7 @@ psycopg2 = "*"
 django-heroku = "*"
 waitress = "*"
 dj-database-url = "*"
+validate-email = "*"
 
 [dev-packages]
 
