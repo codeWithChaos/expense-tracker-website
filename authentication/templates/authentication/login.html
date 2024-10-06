@@ -1,9 +1,44 @@
-{% extends "authentication/_base_auth.html" %}
-
+{% extends "authentication/_base_auth.html" %} 
 {% block content %}
-<div class="card">
-    <div class="card-body">
-        <h1>Login</h1>
+<div class="container">
+  {% include 'expenses/partials/messages.html' %}
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="card mt-5 shadow-lg">
+        <div class="card-title mt-3">
+          <h3 class="text-center lh-1">Login to your account</h3>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+              <input
+                type="text"
+                name="username"
+                id="usernameField"
+                class="form-control form-control-sm"
+                placeholder="Username" />
+            </div>
+            <div class="form-group mb-3">
+              <input
+                type="password"
+                name="password"
+                id="passwordField"
+                class="form-control form-control-sm"
+                placeholder="Password" />
+            </div>
+            <div class="d-grid gap-2 col-12 mt-5">
+              <input
+                type="submit"
+                value="Login"
+                class="btn btn-outline-dark submit-btn" />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+    <div class="col-md-4"></div>
+  </div>
 </div>
 {% endblock %}
