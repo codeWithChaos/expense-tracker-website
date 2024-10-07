@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # local apps
     'expenses',
     'authentication',
+    'userpreferences',
 ]
 
 MIDDLEWARE = [

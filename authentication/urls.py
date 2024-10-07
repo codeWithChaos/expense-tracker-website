@@ -9,4 +9,3 @@ urlpatterns = [
     path('validate-username', UsernameValidationView.as_view(), name='validate-username'),
     path('validate-email', EmailValidationView.as_view(), name='validate-email'),
 ]
-
