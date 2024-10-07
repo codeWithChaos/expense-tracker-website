@@ -1,14 +1,20 @@
 {% extends "expenses/_base.html" %} 
 {% block title %}expenses{% endblock %}
 {% block content %}
-<div class="container">
-  {% include 'expenses/partials/messages.html' %}
-  <h1>Expenses</h1>
-
-  <ul class="list-group">
-    <li class="list-group-item">Bought car</li>
-    <li class="list-group-item">Bought r8</li>
-    <li class="list-group-item">Bought me</li>
-  </ul>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Expernses</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-2">
+      <a href="{% url 'add-expense' %}" class="btn btn-outline-dark">Add Expense</a>
+    </div>
+  </div>
 </div>
+{% include 'expenses/partials/messages.html' %}
 {% endblock %}

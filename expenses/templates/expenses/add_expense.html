@@ -1,6 +1,18 @@
-{% extends "expenses/_base.html" %}
-
+{% extends "expenses/_base.html" %} 
+{% block title %}add expense{% endblock %}
 {% block content %}
 <h1>Add Expense</h1>
-{% endblock %}
+<div class="container mt-4">
+  <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Expernses</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+    </ol>
+  </nav>
 
+  <form method="post" action="{% url 'home' %}">
+    {% csrf_token %}
+    
+  </form>
+</div>
+{% endblock %}
