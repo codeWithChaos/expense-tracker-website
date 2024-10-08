@@ -1,20 +1,87 @@
 {% extends "expenses/_base.html" %} 
-{% block title %}expenses{% endblock %}
-{% block content %}
+{% block title %}expenses{% endblock %} 
+{% block content %} 
+{% include 'expenses/partials/messages.html' %}
 <div class="container mt-4">
+  <hr class="my-4" />
   <div class="row">
     <div class="col-md-10">
-      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'home' %}">Expernses</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'home' %}">Expernses</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            My Expenses
+          </li>
         </ol>
       </nav>
     </div>
     <div class="col-md-2">
-      <a href="{% url 'add-expense' %}" class="btn btn-outline-dark">Add Expense</a>
+      <a href="{% url 'add-expense' %}" class="btn btn-outline-success rounded-pill"
+        >Add Expense</a
+      >
     </div>
   </div>
+  <div class="container mt-3">
+    {% if expenses.count %}
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Amount (CURRENCY)</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in page_obj %}
+        <tr>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.date }}</td>
+          <td>
+            <a
+              href="{% url 'edit-expense' expense.id %}"
+              class="btn btn-outline-success btn-sm rounded-4"
+              >Edit</a
+            >
+            <a
+              href="{% url 'delete-expense' expense.id %}"
+              class="btn btn-outline-danger btn-sm rounded-4"
+              >X</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      Showing page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </div>
+    <ul class="pagination align-right float-end me-auto">
+      {% if page_obj.has_previous %}
+        <li {% if page_obj.number == 1 %} class="page-item active"{% endif %}>
+          <a class="page-link" href="?page=1">&laquo; 1</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        </li>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        </li>
+      {% endif %}
+    </ul>
+    {% endif %}
+  </div>
 </div>
-{% include 'expenses/partials/messages.html' %}
 {% endblock %}

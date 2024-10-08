@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Expense(models.Model):
     amount = models.FloatField()
     date = models.DateField(default=timezone.now)
-    descriiption = models.TextField()
+    description = models.TextField()
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     category = models.CharField(max_length=255)
     
