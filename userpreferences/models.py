@@ -7,4 +7,4 @@ class UserPreference(models.Model):
     
     
     def __str__(self):
-        return f"{self.user}'s preferences"
+        return f"{self.currency}"

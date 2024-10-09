@@ -86,7 +86,7 @@
             General
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mb-2">
           <a class="nav-link d-flex align-items-center gap-2" href="#">
             <svg class="bi">
               <use xlink:href="#file-earmark-text" />
@@ -94,10 +94,17 @@
             Account
           </a>
         </li>
+        <li class="nav-item mt-5">
+          <a class="nav-link d-flex align-items-center gap-2 lh-lg fw-bolder" href="#">
+            <button class="btn btn-outline-success shadow-lg" type="button">
+            {{ request.user.username }}
+            </button>
+          </a>
+        </li>
         <li class="nav-item">
           <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <input class="nav-link" type="submit" value="Sign out" />
+              <input class="nav-link" type="submit" value="Sign out" />
           </form>
         </li>
       </ul>

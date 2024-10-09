@@ -4,6 +4,10 @@ from .models import Category, Expense
 from django.contrib import messages
 from django.utils import timezone
 from django.core.paginator import Paginator
+import json
+from django.http import JsonResponse
+from userpreferences.models import UserPreference
+
 
 @login_required(login_url='/authentication/login')
 def index(request):
@@ -12,10 +16,16 @@ def index(request):
     paginator = Paginator(expenses, 2)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator, page_number)
+    # currency = UserPreference.objects.get(user=request.user).currency
+    try:
+        currency = UserPreference.objects.get(user=request.user).currency
+    except UserPreference.DoesNotExist:
+        currency = 'USD'
     context = {
         'categories': catecogories,
         'expenses': expenses,
         'page_obj': page_obj,
+        'currency': currency,
     }
     return render(request, 'expenses/index.html', context)
 
@@ -101,3 +111,14 @@ def delete_expense(request, id):
     expense.delete()
     messages.success(request, 'Expense deleted successfully')
     return redirect('home')
+
+
+def search_expenses(request):
+    if request.method == 'POST':
+        search_string = json.loads(request.body).get('searchText', '')
+        
+        # Users should only be able to search their own expenses
+        expenses = Expense.objects.filter(amount__startswith=search_string, owner=request.user) | Expense.objects.filter(date__icontains=search_string, owner=request.user) | Expense.objects.filter(description__icontains=search_string, owner=request.user) | Expense.objects.filter(category__icontains=search_string, owner=request.user)
+        
+        data = expenses.values()
+        return JsonResponse(list(data), safe=False)

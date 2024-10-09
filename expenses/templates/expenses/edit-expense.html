@@ -56,7 +56,7 @@
             class="form-control"
             type="date"
             name="expense_date"
-            value="{{ today_date }}" />
+            value="{{ values.date | date:'Y-m-d' }}" />
         </div>
         <div class="d-grid gap-2 col-6 mx-auto">
           <input
