@@ -1,0 +1,60 @@
+{% extends "expenses/_base.html" %} 
+{% block title %}add income{% endblock %}
+{% block content %}
+<h1>Add Income</h1>
+<div class="container mt-4">
+  <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'home' %}">Income</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add Income</li>
+    </ol>
+  </nav>
+
+  <div class="card shadow-lg">
+    <div class="card-body v-stack gap-2">
+      <form method="post" action="{% url 'add-income' %}">
+        {% include 'expenses/partials/messages.html' %} 
+        {% csrf_token %}
+        <div class="form-group mb-3">
+          <label for="">Amount</label>
+          <input
+            class="form-control"
+            type="text"
+            name="amount"
+            value="{{ value.amount }}" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="">Description</label>
+          <input class="form-control" 
+          type="text" 
+          name="description"
+          value="{{ value.description }}" />
+        </div>
+        <div class="form-group mb-3">
+          <label for="">Source</label>
+          <select name="source" class="form-select form-control-sm">
+            {% for source in sources %}
+            <option value="{{ source.name }}" name="source">
+              {{ source.name }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group mb-3">
+          <label for="">Date of Income</label>
+          <input class="form-control" 
+          type="date" 
+          name="income_date"
+          value="{{ today_date }}" />
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <input
+            type="submit"
+            class="btn btn-outline-dark rounded-4"
+            value="Submit" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
