@@ -9,7 +9,7 @@
             <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="{% url 'home' %}">Expenses</a>
+                        <a href="{% url 'income' %}">Income</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                         My Income
@@ -51,19 +51,21 @@
           <tr>
             <td>{{ income.amount }}</td>
             <td>{{ income.source }}</td>
-            <td>{{ income.description }}</td>
+            <td>
+              {% with income.description|slice:":20" as short_description %}
+                {{ short_description }} {% if income.description|length > 20 %}...{% endif %}
+              {% endwith %}
+            </td>
             <td>{{ income.date }}</td>
             <td>
-              {% comment %} <a
-                href="{% url 'edit-icnome' income.id %}"
-                class="btn btn-outline-success btn-sm rounded-4"
-                >Edit</a
-              >
+              <a
+                href="{% url 'edit-income' income.id %}"
+                class="btn btn-outline-info btn-sm rounded-4"
+                >Edit</a>
               <a
                 href="{% url 'delete-income' income.id %}"
                 class="btn btn-outline-danger btn-sm rounded-4 ms-3"
-                >X</a
-              > {% endcomment %}
+                >X</a>
             </td>
           </tr>
           {% endfor %}

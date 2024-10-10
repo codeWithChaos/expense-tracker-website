@@ -1,4 +1,4 @@
 .env
 db.sqlite
-.notes.txt
+notes.txt
 config/settings.txt

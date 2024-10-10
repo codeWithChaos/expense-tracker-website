@@ -1,16 +1,16 @@
 {% extends "expenses/_base.html" %} 
-{% block title %}edit expense{% endblock %}
+{% block title %}edit income{% endblock %}
 {% block content %}
-<h1>Edit Expense</h1>
+<h1>Edit Income</h1>
 <div class="container mt-4">
   <div class="row">
     <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="{% url 'home' %}">Expenses</a>
+          <a href="{% url 'income' %}">Income</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-          Edit Expenses
+          Edit Income
         </li>
       </ol>
     </nav>
@@ -18,7 +18,7 @@
 
   <div class="card shadow-lg">
     <div class="card-body v-stack gap-2">
-      <form method="post" action="{% url 'edit-expense' expense.id %}">
+      <form method="post" action="{% url 'edit-income' income.id %}">
         {% include 'expenses/partials/messages.html' %} 
         {% csrf_token %}
         <div class="form-group mb-3">
@@ -38,24 +38,24 @@
             value="{{ values.description }}" />
         </div>
         <div class="form-group mb-3">
-          <label for="">Category</label>
-          <select name="category" class="form-select form-control-sm">
-            <option selected name="category" value="{{ values.category }}">
-              {{ values.category }}
+          <label for="">Source</label>
+          <select name="source" class="form-select form-control-sm">
+            <option selected name="source" value="{{ values.source }}">
+              {{ values.source }}
             </option>
-            {% for category in categories %}
-            <option value="{{ category.name }}" name="category">
-              {{ category.name }}
+            {% for source in sources %}
+            <option value="{{ source.name }}" name="source">
+              {{ source.name }}
             </option>
             {% endfor %}
           </select>
         </div>
         <div class="form-group mb-3">
-          <label for="">Date of Expense</label>
+          <label for="">Date of Income</label>
           <input
             class="form-control"
             type="date"
-            name="expense_date"
+            name="income_date"
             value="{{ values.date | date:'Y-m-d' }}" />
         </div>
         <div class="d-grid gap-2 col-6 mx-auto">

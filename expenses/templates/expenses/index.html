@@ -10,7 +10,7 @@
       <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="{% url 'home' %}">Expernses</a>
+            <a href="{% url 'home' %}">Expenses</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             My Expenses
@@ -51,7 +51,11 @@
           <tr>
             <td>{{ expense.amount }}</td>
             <td>{{ expense.category }}</td>
-            <td>{{ expense.description }}</td>
+            <td>
+              {% with expense.description|truncatewords:3 as truncated_description %}
+                {{ truncated_description }}{% if expense.description|length > truncated_description|length %}...{% endif %}
+              {% endwith%}
+            </td>
             <td>{{ expense.date }}</td>
             <td>
               <a

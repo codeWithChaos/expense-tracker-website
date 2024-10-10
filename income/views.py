@@ -60,21 +60,48 @@ def add_income(request):
     return render(request, 'income/add-income.html', context)
         
 def edit_income(request, id):
-    income = get_object_or_404(income, pk=id)
+    income = get_object_or_404(Income, pk=id)
+    source = Source.objects.all()
     
-    if request.method == 'POST':
-        amount = request.POST.get('amount')
-        description = request.POST.get('description')
-        source = request.POST.get('source')
-        date = request.POST.get('income_date')
+    context = {
+        'income': income,
+        'values': request.POST,
+        'sources': source,
+    }
+    if request.method == 'GET':
+        return render(request, 'income/edit-income.html', context)
+    else:
+        if request.method == 'POST':
+            amount = request.POST.get('amount')
+            description = request.POST.get('description')
+            source = request.POST.get('source')
+            date = request.POST.get('income_date')
+            
+            # Validate the form data
+            if not amount:
+                messages.error(request, 'Amount is required')
+                return render(request, 'income/edit-income.html', context)
+            
+            if not description:
+                messages.error(request, 'Description is required')
+                return render(request, 'income/edit-income.html', context)
+            
+            # Update the existing Income object with the new data
+            income.owner = request.user
+            income.amount = amount
+            income.description = description
+            income.source = source
+            income.date = date
+            income.save()
+            
+            messages.success(request, 'Income updated successfullu')
+            return redirect('income')
         
-        if not amount:
-            messages.error(request, 'Amount is required')
-            return render(request, 'income/edit-income.html')
-        
-        if not description:
-            messages.error(request, 'Description is required')
-            return render(request, 'income/edit-income.html')
-        
-        
+        return render(request, 'income/edit-income.html', context)
+
+def delete_income(request, id):
+    income = Income.objects.get(pk=id)
+    income.delete()
+    messages.success(request, 'Income deleted successfully')
+    return redirect('income')
         

@@ -1,8 +1,0 @@
-How to implement AJAX search functionality in django:
-import json
-
-def search(request):
-    # check if it is a post request
-    if request.method == 'POST':
-        search_string = json.loads(request.body).get('searchText')
-	expenses = Expense.objects.filter(owner=request.user, amount__starts_with=search_string) | Expense.objects.filter(owner=request.user, date__istartswith=search_string) | Expense.objects.filter(owner=request.user, description__icontains=search_string) | Expense.objects.filter(owner=request.user, category__icontians=search_string)
