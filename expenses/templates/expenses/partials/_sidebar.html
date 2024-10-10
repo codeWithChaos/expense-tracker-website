@@ -34,7 +34,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2" href="#">
+          <a class="nav-link d-flex align-items-center gap-2" href="{% url 'income' %}">
             <svg class="bi"><use xlink:href="#cart" /></svg>
             Income
           </a>
@@ -101,12 +101,18 @@
             </button>
           </a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
               <input class="nav-link" type="submit" value="Sign out" />
           </form>
         </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>

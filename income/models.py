@@ -15,6 +15,9 @@ class Income(models.Model):
     
     class Meta:
         ordering = ['-date']  # Ordering by date in descending order
+    
+    class Meta:
+        verbose_name_plural = 'Income'
         
         
 class Source(models.Model):

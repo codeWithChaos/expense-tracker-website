@@ -25,7 +25,7 @@ def index(request):
         'categories': catecogories,
         'expenses': expenses,
         'page_obj': page_obj,
-        # 'currency': currency,
+        'currency': currency,
     }
     return render(request, 'expenses/index.html', context)
 
