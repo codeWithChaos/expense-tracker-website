@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.utils import timezone
 from django.core.paginator import Paginator
 from userpreferences.models import UserPreference
+import json
+from django.http import JsonResponse
+from django.db.models import Q
 
 
 @login_required(login_url='/authentication/login')
@@ -59,16 +62,24 @@ def add_income(request):
         
     return render(request, 'income/add-income.html', context)
         
+@login_required(login_url='/authentication/login')
 def edit_income(request, id):
     income = get_object_or_404(Income, pk=id)
-    source = Source.objects.all()
+    sources = Source.objects.all()
     
-    context = {
-        'income': income,
-        'values': request.POST,
-        'sources': source,
-    }
+    
     if request.method == 'GET':
+        # Prefill the form with the existing data
+        context = {
+            'income': income,
+            'values': {
+                'amount': income.amount,
+                'description': income.description,
+                'source': income.source,
+                'date': income.date.strftime('%Y-%m-%d'),
+            },
+            'sources': sources,
+        }
         return render(request, 'income/edit-income.html', context)
     else:
         if request.method == 'POST':
@@ -76,6 +87,12 @@ def edit_income(request, id):
             description = request.POST.get('description')
             source = request.POST.get('source')
             date = request.POST.get('income_date')
+            
+            context = {
+                'income': income,
+                'values': request.POST,
+                'sources': sources,
+            }
             
             # Validate the form data
             if not amount:
@@ -105,3 +122,19 @@ def delete_income(request, id):
     messages.success(request, 'Income deleted successfully')
     return redirect('income')
         
+    
+def search_income(request):
+    if request.method == 'POST':
+        search_data = json.loads(request.body)
+        search_text = search_data.get('searchText', '')
+        
+        income = Income.objects.filter(
+            Q(amount__istartswith=search_text) |
+            Q(source__icontains=search_text)|
+            Q(description__icontains=search_text)|
+            Q(date__icontains=search_text),
+            owner=request.user
+        )
+        
+        data = income.values('amount', 'source', 'description', 'date')
+        return JsonResponse(list(data), safe=False)
