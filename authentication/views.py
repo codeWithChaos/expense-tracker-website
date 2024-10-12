@@ -5,9 +5,12 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from validate_email import validate_email
 from django.contrib import messages
-from django.core.mail import EmailMessage
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView
+from .forms import UsernamePasswordResetForm
+from django.urls import reverse_lazy
+
 
 class RegistrationView(View):
     def get(self, request):
@@ -102,3 +105,12 @@ class LogoutView(View):
         auth.logout(request)
         messages.success(request, 'You have been logged out!')
         return redirect('login')
+    
+    
+class ResetPasswordView(PasswordResetView):
+    form_class = UsernamePasswordResetForm
+    template_name = 'authentication/password_reset.html'
+    success_url = reverse_lazy('password_reset_done') 
+    
+
+

@@ -1,17 +1,21 @@
 <html lang="en" data-bs-theme="auto">
   {% load static %}
   <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{{ orion_text }} | {% block title %}{% endblock %}</title>
 
-    <link rel="icon" href="{% static 'img/onx_logo.jpeg' %}" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="{% static 'img/onx_logo.jpeg' %}"
+      type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
-    {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" /> {% endcomment %}
+    {% comment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    {% endcomment %}
 
     <link href="{% static 'boot/css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/main.css' %}" rel="/symbol" />
@@ -22,6 +26,14 @@
       rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="{% static 'css/dashboard.css'%}" rel="stylesheet" />
+
+    {% comment %} chart JS cdn {% endcomment %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
+      integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -240,10 +252,7 @@
       src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
       integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
       crossorigin="anonymous"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js"
-      integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp"
-      crossorigin="anonymous"></script>
+    
     <script src="dashboard.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
   </body>
