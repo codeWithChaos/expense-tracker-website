@@ -11,6 +11,7 @@ waitress = "*"
 dj-database-url = "*"
 validate-email = "*"
 pillow = "*"
+xlwt = "*"
 
 [dev-packages]
 
